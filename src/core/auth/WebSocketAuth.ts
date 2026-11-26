@@ -8,8 +8,19 @@ export class WebSocketAuth {
   constructor(private strategy: ApiKeyStrategy) {}
 
   async validateRequest(request: IncomingMessage) {
-    const apikey = this.getKeyFromQueryParams('x-api-key', request);
+    // Server-side clients can send the key as a header, keeping it out of access logs.
+    const apikey =
+      this.getKeyFromHeaders('x-api-key', request) ??
+      this.getKeyFromQueryParams('x-api-key', request);
     return await this.strategy.user(apikey);
+  }
+
+  private getKeyFromHeaders(name: string, request: IncomingMessage) {
+    const value = request.headers?.[name];
+    if (Array.isArray(value)) {
+      return value[0];
+    }
+    return value || undefined;
   }
 
   private getKeyFromQueryParams(name: string, request: IncomingMessage) {
