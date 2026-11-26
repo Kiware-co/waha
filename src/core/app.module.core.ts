@@ -14,6 +14,10 @@ import { ProfileController } from '@waha/api/profile.controller';
 import { ServerController } from '@waha/api/server.controller';
 import { ServerDebugController } from '@waha/api/server.debug.controller';
 import { WebsocketGatewayCore } from '@waha/api/websocket.gateway.core';
+import {
+  CallAudioGateway,
+  CallVideoGateway,
+} from '@waha/api/calls/calls.media.gateway';
 import { AppsModuleExports } from '@waha/apps/apps.module';
 import { ContactsSessionController } from '@waha/api/contacts.session.controller';
 import { ApiKeyStrategy } from '@waha/core/auth/apiKey.strategy';
@@ -210,6 +214,8 @@ export const PROVIDERS_BASE: Provider[] = [
   WhatsappConfigService,
   EngineConfigService,
   WebsocketGatewayCore,
+  CallAudioGateway,
+  CallVideoGateway,
   MediaLocalStorageConfig,
   MongoStoreHealthIndicator,
   CheckFreeDiskSpaceIndicator,

@@ -1,4 +1,10 @@
 import { MessageCappingTracker } from '@waha/core/abc/MessageCappingTracker';
+import {
+  CallInfo,
+  CallSettings,
+  StartCallRequest,
+} from '@waha/structures/calls.dto';
+import { CallAudioChannel, CallVideoChannel } from '@waha/core/abc/calls';
 import { ReachoutTimelockTracker } from '@waha/core/abc/ReachoutTimelockTracker';
 import { getBrowserExecutablePath as getBrowserExecutablePathAutodetect } from '@waha/core/abc/session.browser';
 import { IMediaConverter } from '@waha/core/media/IConverter';
@@ -774,6 +780,57 @@ export abstract class WhatsappSession {
   }
 
   public rejectCall(from: string, id: string): Promise<void> {
+    throw new NotImplementedByEngineError();
+  }
+
+  /**
+   * Managed calls (answer, place and talk). Only GOWS implements them.
+   */
+  public getCallSettings(): Promise<CallSettings> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public setCallSettings(settings: CallSettings): Promise<CallSettings> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public listCalls(): Promise<CallInfo[]> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public getCall(callId: string): Promise<CallInfo> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public startCall(request: StartCallRequest): Promise<CallInfo> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public answerCall(callId: string, agent?: string): Promise<CallInfo> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public rejectManagedCall(callId: string): Promise<void> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public hangupCall(callId: string): Promise<void> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public muteCall(callId: string, muted: boolean): Promise<CallInfo> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public setCallVideo(callId: string, enabled: boolean): Promise<CallInfo> {
+    throw new NotImplementedByEngineError();
+  }
+
+  public openCallAudio(callId: string): CallAudioChannel {
+    throw new NotImplementedByEngineError();
+  }
+
+  public openCallVideo(callId: string): CallVideoChannel {
     throw new NotImplementedByEngineError();
   }
 

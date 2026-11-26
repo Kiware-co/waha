@@ -136,7 +136,12 @@ import {
   WAMessage,
   WAMessageReaction,
 } from '@waha/structures/responses.dto';
-import { CallData } from '@waha/structures/calls.dto';
+import {
+  CallData,
+  CallInfo,
+  CallSettings,
+  StartCallRequest,
+} from '@waha/structures/calls.dto';
 import {
   MeInfo,
   MessageCappingData,
@@ -214,6 +219,8 @@ import axiosRetry from 'axios-retry';
 import * as path from 'path';
 import MessageServiceClient = messages.MessageServiceClient;
 import * as fsp from 'fs/promises';
+import { GowsCalls } from '@waha/core/engines/gows/calls.gows';
+import { CallAudioChannel, CallVideoChannel } from '@waha/core/abc/calls';
 
 axiosRetry(axios, { retries: 3 });
 
@@ -262,6 +269,13 @@ enum WhatsMeowEvent {
   CALL_REJECT = 'events.CallReject',
   CALL_TERMINATE = 'events.CallTerminate',
   CALL_OFFER_NOTICE = 'events.CallOfferNotice',
+  // Managed calls (GOWS calls engine)
+  CALLS_RINGING = 'calls.Ringing',
+  CALLS_CONNECTED = 'calls.Connected',
+  CALLS_ENDED = 'calls.Ended',
+  CALLS_AUDIO_SILENT = 'calls.AudioSilent',
+  CALLS_AUDIO_RESTORED = 'calls.AudioRestored',
+  CALLS_VIDEO = 'calls.Video',
   // Other
   AppState = 'events.AppState',
   AppStateSyncComplete = 'AppStateSyncComplete',
@@ -279,6 +293,7 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
 
   protected qr: QR;
   public client: MessageServiceClient;
+  protected calls: GowsCalls;
   protected stream$: GowsEventStreamObservable;
   protected all$: Observable<EnginePayload>;
   protected events: EventsFromObservable<WhatsMeowEvent>;
@@ -346,6 +361,31 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
       this.status = WAHASessionStatus.FAILED;
       throw err;
     });
+    this.calls = new GowsCalls(this.client, this.session);
+    await this.applyCallSettings();
+  }
+
+  /**
+   * Pushes the saved per-session call switch to the engine. Calls stay off when the
+   * engine runs without WAHA_GOWS_CALLS_ENABLED; messaging is never affected.
+   */
+  protected async applyCallSettings() {
+    const config = this.sessionConfig?.calls;
+    if (!config?.enabled) {
+      return;
+    }
+    try {
+      const settings = await this.calls.setSettings({
+        enabled: config.enabled,
+        allow: config.allow ?? [],
+      });
+      this.logger.info({ calls: settings }, 'Call settings applied');
+    } catch (err) {
+      this.logger.warn(
+        { err: err },
+        'Call settings not applied, calls stay off',
+      );
+    }
   }
 
   protected getProxyUrl(config: ProxyConfig): string {
@@ -713,6 +753,26 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
     );
     this.events2.get(WAHAEvents.CALL_REJECTED).switch(callRejected$);
 
+    // Managed calls
+    this.events2
+      .get(WAHAEvents.CALL_RINGING)
+      .switch(all$.pipe(onlyEvent(WhatsMeowEvent.CALLS_RINGING)));
+    this.events2
+      .get(WAHAEvents.CALL_CONNECTED)
+      .switch(all$.pipe(onlyEvent(WhatsMeowEvent.CALLS_CONNECTED)));
+    this.events2
+      .get(WAHAEvents.CALL_ENDED)
+      .switch(all$.pipe(onlyEvent(WhatsMeowEvent.CALLS_ENDED)));
+    this.events2
+      .get(WAHAEvents.CALL_AUDIO_SILENT)
+      .switch(all$.pipe(onlyEvent(WhatsMeowEvent.CALLS_AUDIO_SILENT)));
+    this.events2
+      .get(WAHAEvents.CALL_AUDIO_RESTORED)
+      .switch(all$.pipe(onlyEvent(WhatsMeowEvent.CALLS_AUDIO_RESTORED)));
+    this.events2
+      .get(WAHAEvents.CALL_VIDEO)
+      .switch(all$.pipe(onlyEvent(WhatsMeowEvent.CALLS_VIDEO)));
+
     const presence$ = all$.pipe(
       onlyEvent(WhatsMeowEvent.PRESENCE),
       filter((event: any) => this.jids.include(event?.From)),
@@ -1048,6 +1108,59 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
     );
     const data = response.toObject();
     return data.id;
+  }
+
+  async getCallSettings(): Promise<CallSettings> {
+    return this.calls.getSettings();
+  }
+
+  async setCallSettings(settings: CallSettings): Promise<CallSettings> {
+    return this.calls.setSettings(settings);
+  }
+
+  async listCalls(): Promise<CallInfo[]> {
+    return this.calls.list();
+  }
+
+  async getCall(callId: string): Promise<CallInfo> {
+    return this.calls.get(callId);
+  }
+
+  @Activity()
+  async startCall(request: StartCallRequest): Promise<CallInfo> {
+    return this.calls.start(request.phone, request.video ?? false);
+  }
+
+  @Activity()
+  async answerCall(callId: string, agent?: string): Promise<CallInfo> {
+    return this.calls.answer(callId, agent);
+  }
+
+  @Activity()
+  async rejectManagedCall(callId: string): Promise<void> {
+    return this.calls.reject(callId);
+  }
+
+  @Activity()
+  async hangupCall(callId: string): Promise<void> {
+    return this.calls.hangup(callId);
+  }
+
+  async muteCall(callId: string, muted: boolean): Promise<CallInfo> {
+    return this.calls.mute(callId, muted);
+  }
+
+  @Activity()
+  async setCallVideo(callId: string, enabled: boolean): Promise<CallInfo> {
+    return this.calls.video(callId, enabled);
+  }
+
+  openCallAudio(callId: string): CallAudioChannel {
+    return this.calls.openAudio(callId);
+  }
+
+  openCallVideo(callId: string): CallVideoChannel {
+    return this.calls.openVideo(callId);
   }
 
   @Activity()

@@ -10918,6 +10918,1938 @@ export namespace messages {
             return RejectCallRequest.deserialize(bytes);
         }
     }
+    export class CallSettings extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            enabled?: boolean;
+            allow?: string[];
+            available?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("enabled" in data && data.enabled != undefined) {
+                    this.enabled = data.enabled;
+                }
+                if ("allow" in data && data.allow != undefined) {
+                    this.allow = data.allow;
+                }
+                if ("available" in data && data.available != undefined) {
+                    this.available = data.available;
+                }
+            }
+        }
+        get enabled() {
+            return pb_1.Message.getFieldWithDefault(this, 1, false) as boolean;
+        }
+        set enabled(value: boolean) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get allow() {
+            return pb_1.Message.getFieldWithDefault(this, 2, []) as string[];
+        }
+        set allow(value: string[]) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get available() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set available(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            enabled?: boolean;
+            allow?: string[];
+            available?: boolean;
+        }): CallSettings {
+            const message = new CallSettings({});
+            if (data.enabled != null) {
+                message.enabled = data.enabled;
+            }
+            if (data.allow != null) {
+                message.allow = data.allow;
+            }
+            if (data.available != null) {
+                message.available = data.available;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                enabled?: boolean;
+                allow?: string[];
+                available?: boolean;
+            } = {};
+            if (this.enabled != null) {
+                data.enabled = this.enabled;
+            }
+            if (this.allow != null) {
+                data.allow = this.allow;
+            }
+            if (this.available != null) {
+                data.available = this.available;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.enabled != false)
+                writer.writeBool(1, this.enabled);
+            if (this.allow.length)
+                writer.writeRepeatedString(2, this.allow);
+            if (this.available != false)
+                writer.writeBool(3, this.available);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallSettings {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallSettings();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.enabled = reader.readBool();
+                        break;
+                    case 2:
+                        pb_1.Message.addToRepeatedField(message, 2, reader.readString());
+                        break;
+                    case 3:
+                        message.available = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallSettings {
+            return CallSettings.deserialize(bytes);
+        }
+    }
+    export class SetCallSettingsRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session?: Session;
+            enabled?: boolean;
+            allow?: string[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [3], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session" in data && data.session != undefined) {
+                    this.session = data.session;
+                }
+                if ("enabled" in data && data.enabled != undefined) {
+                    this.enabled = data.enabled;
+                }
+                if ("allow" in data && data.allow != undefined) {
+                    this.allow = data.allow;
+                }
+            }
+        }
+        get session() {
+            return pb_1.Message.getWrapperField(this, Session, 1) as Session;
+        }
+        set session(value: Session) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_session() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get enabled() {
+            return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+        }
+        set enabled(value: boolean) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get allow() {
+            return pb_1.Message.getFieldWithDefault(this, 3, []) as string[];
+        }
+        set allow(value: string[]) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            session?: ReturnType<typeof Session.prototype.toObject>;
+            enabled?: boolean;
+            allow?: string[];
+        }): SetCallSettingsRequest {
+            const message = new SetCallSettingsRequest({});
+            if (data.session != null) {
+                message.session = Session.fromObject(data.session);
+            }
+            if (data.enabled != null) {
+                message.enabled = data.enabled;
+            }
+            if (data.allow != null) {
+                message.allow = data.allow;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session?: ReturnType<typeof Session.prototype.toObject>;
+                enabled?: boolean;
+                allow?: string[];
+            } = {};
+            if (this.session != null) {
+                data.session = this.session.toObject();
+            }
+            if (this.enabled != null) {
+                data.enabled = this.enabled;
+            }
+            if (this.allow != null) {
+                data.allow = this.allow;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_session)
+                writer.writeMessage(1, this.session, () => this.session.serialize(writer));
+            if (this.enabled != false)
+                writer.writeBool(2, this.enabled);
+            if (this.allow.length)
+                writer.writeRepeatedString(3, this.allow);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SetCallSettingsRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SetCallSettingsRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session, () => message.session = Session.deserialize(reader));
+                        break;
+                    case 2:
+                        message.enabled = reader.readBool();
+                        break;
+                    case 3:
+                        pb_1.Message.addToRepeatedField(message, 3, reader.readString());
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SetCallSettingsRequest {
+            return SetCallSettingsRequest.deserialize(bytes);
+        }
+    }
+    export class CallInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            callId?: string;
+            direction?: string;
+            phone?: string;
+            chatId?: string;
+            isVideo?: boolean;
+            state?: string;
+            muted?: boolean;
+            videoEnabled?: boolean;
+            peerVideoActive?: boolean;
+            answeredBy?: string;
+            startedAt?: number;
+            connectedAt?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("callId" in data && data.callId != undefined) {
+                    this.callId = data.callId;
+                }
+                if ("direction" in data && data.direction != undefined) {
+                    this.direction = data.direction;
+                }
+                if ("phone" in data && data.phone != undefined) {
+                    this.phone = data.phone;
+                }
+                if ("chatId" in data && data.chatId != undefined) {
+                    this.chatId = data.chatId;
+                }
+                if ("isVideo" in data && data.isVideo != undefined) {
+                    this.isVideo = data.isVideo;
+                }
+                if ("state" in data && data.state != undefined) {
+                    this.state = data.state;
+                }
+                if ("muted" in data && data.muted != undefined) {
+                    this.muted = data.muted;
+                }
+                if ("videoEnabled" in data && data.videoEnabled != undefined) {
+                    this.videoEnabled = data.videoEnabled;
+                }
+                if ("peerVideoActive" in data && data.peerVideoActive != undefined) {
+                    this.peerVideoActive = data.peerVideoActive;
+                }
+                if ("answeredBy" in data && data.answeredBy != undefined) {
+                    this.answeredBy = data.answeredBy;
+                }
+                if ("startedAt" in data && data.startedAt != undefined) {
+                    this.startedAt = data.startedAt;
+                }
+                if ("connectedAt" in data && data.connectedAt != undefined) {
+                    this.connectedAt = data.connectedAt;
+                }
+            }
+        }
+        get callId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set callId(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get direction() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set direction(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get phone() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set phone(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get chatId() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set chatId(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get isVideo() {
+            return pb_1.Message.getFieldWithDefault(this, 5, false) as boolean;
+        }
+        set isVideo(value: boolean) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get state() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set state(value: string) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        get muted() {
+            return pb_1.Message.getFieldWithDefault(this, 7, false) as boolean;
+        }
+        set muted(value: boolean) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get videoEnabled() {
+            return pb_1.Message.getFieldWithDefault(this, 8, false) as boolean;
+        }
+        set videoEnabled(value: boolean) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get peerVideoActive() {
+            return pb_1.Message.getFieldWithDefault(this, 9, false) as boolean;
+        }
+        set peerVideoActive(value: boolean) {
+            pb_1.Message.setField(this, 9, value);
+        }
+        get answeredBy() {
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+        }
+        set answeredBy(value: string) {
+            pb_1.Message.setField(this, 10, value);
+        }
+        get startedAt() {
+            return pb_1.Message.getFieldWithDefault(this, 11, 0) as number;
+        }
+        set startedAt(value: number) {
+            pb_1.Message.setField(this, 11, value);
+        }
+        get connectedAt() {
+            return pb_1.Message.getFieldWithDefault(this, 12, 0) as number;
+        }
+        set connectedAt(value: number) {
+            pb_1.Message.setField(this, 12, value);
+        }
+        static fromObject(data: {
+            callId?: string;
+            direction?: string;
+            phone?: string;
+            chatId?: string;
+            isVideo?: boolean;
+            state?: string;
+            muted?: boolean;
+            videoEnabled?: boolean;
+            peerVideoActive?: boolean;
+            answeredBy?: string;
+            startedAt?: number;
+            connectedAt?: number;
+        }): CallInfo {
+            const message = new CallInfo({});
+            if (data.callId != null) {
+                message.callId = data.callId;
+            }
+            if (data.direction != null) {
+                message.direction = data.direction;
+            }
+            if (data.phone != null) {
+                message.phone = data.phone;
+            }
+            if (data.chatId != null) {
+                message.chatId = data.chatId;
+            }
+            if (data.isVideo != null) {
+                message.isVideo = data.isVideo;
+            }
+            if (data.state != null) {
+                message.state = data.state;
+            }
+            if (data.muted != null) {
+                message.muted = data.muted;
+            }
+            if (data.videoEnabled != null) {
+                message.videoEnabled = data.videoEnabled;
+            }
+            if (data.peerVideoActive != null) {
+                message.peerVideoActive = data.peerVideoActive;
+            }
+            if (data.answeredBy != null) {
+                message.answeredBy = data.answeredBy;
+            }
+            if (data.startedAt != null) {
+                message.startedAt = data.startedAt;
+            }
+            if (data.connectedAt != null) {
+                message.connectedAt = data.connectedAt;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                callId?: string;
+                direction?: string;
+                phone?: string;
+                chatId?: string;
+                isVideo?: boolean;
+                state?: string;
+                muted?: boolean;
+                videoEnabled?: boolean;
+                peerVideoActive?: boolean;
+                answeredBy?: string;
+                startedAt?: number;
+                connectedAt?: number;
+            } = {};
+            if (this.callId != null) {
+                data.callId = this.callId;
+            }
+            if (this.direction != null) {
+                data.direction = this.direction;
+            }
+            if (this.phone != null) {
+                data.phone = this.phone;
+            }
+            if (this.chatId != null) {
+                data.chatId = this.chatId;
+            }
+            if (this.isVideo != null) {
+                data.isVideo = this.isVideo;
+            }
+            if (this.state != null) {
+                data.state = this.state;
+            }
+            if (this.muted != null) {
+                data.muted = this.muted;
+            }
+            if (this.videoEnabled != null) {
+                data.videoEnabled = this.videoEnabled;
+            }
+            if (this.peerVideoActive != null) {
+                data.peerVideoActive = this.peerVideoActive;
+            }
+            if (this.answeredBy != null) {
+                data.answeredBy = this.answeredBy;
+            }
+            if (this.startedAt != null) {
+                data.startedAt = this.startedAt;
+            }
+            if (this.connectedAt != null) {
+                data.connectedAt = this.connectedAt;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.callId.length)
+                writer.writeString(1, this.callId);
+            if (this.direction.length)
+                writer.writeString(2, this.direction);
+            if (this.phone.length)
+                writer.writeString(3, this.phone);
+            if (this.chatId.length)
+                writer.writeString(4, this.chatId);
+            if (this.isVideo != false)
+                writer.writeBool(5, this.isVideo);
+            if (this.state.length)
+                writer.writeString(6, this.state);
+            if (this.muted != false)
+                writer.writeBool(7, this.muted);
+            if (this.videoEnabled != false)
+                writer.writeBool(8, this.videoEnabled);
+            if (this.peerVideoActive != false)
+                writer.writeBool(9, this.peerVideoActive);
+            if (this.answeredBy.length)
+                writer.writeString(10, this.answeredBy);
+            if (this.startedAt != 0)
+                writer.writeInt64(11, this.startedAt);
+            if (this.connectedAt != 0)
+                writer.writeInt64(12, this.connectedAt);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.callId = reader.readString();
+                        break;
+                    case 2:
+                        message.direction = reader.readString();
+                        break;
+                    case 3:
+                        message.phone = reader.readString();
+                        break;
+                    case 4:
+                        message.chatId = reader.readString();
+                        break;
+                    case 5:
+                        message.isVideo = reader.readBool();
+                        break;
+                    case 6:
+                        message.state = reader.readString();
+                        break;
+                    case 7:
+                        message.muted = reader.readBool();
+                        break;
+                    case 8:
+                        message.videoEnabled = reader.readBool();
+                        break;
+                    case 9:
+                        message.peerVideoActive = reader.readBool();
+                        break;
+                    case 10:
+                        message.answeredBy = reader.readString();
+                        break;
+                    case 11:
+                        message.startedAt = reader.readInt64();
+                        break;
+                    case 12:
+                        message.connectedAt = reader.readInt64();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallInfo {
+            return CallInfo.deserialize(bytes);
+        }
+    }
+    export class CallInfoList extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            calls?: CallInfo[];
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("calls" in data && data.calls != undefined) {
+                    this.calls = data.calls;
+                }
+            }
+        }
+        get calls() {
+            return pb_1.Message.getRepeatedWrapperField(this, CallInfo, 1) as CallInfo[];
+        }
+        set calls(value: CallInfo[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
+        }
+        static fromObject(data: {
+            calls?: ReturnType<typeof CallInfo.prototype.toObject>[];
+        }): CallInfoList {
+            const message = new CallInfoList({});
+            if (data.calls != null) {
+                message.calls = data.calls.map(item => CallInfo.fromObject(item));
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                calls?: ReturnType<typeof CallInfo.prototype.toObject>[];
+            } = {};
+            if (this.calls != null) {
+                data.calls = this.calls.map((item: CallInfo) => item.toObject());
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.calls.length)
+                writer.writeRepeatedMessage(1, this.calls, (item: CallInfo) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallInfoList {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallInfoList();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.calls, () => pb_1.Message.addToRepeatedWrapperField(message, 1, CallInfo.deserialize(reader), CallInfo));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallInfoList {
+            return CallInfoList.deserialize(bytes);
+        }
+    }
+    export class CallRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session?: Session;
+            callId?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session" in data && data.session != undefined) {
+                    this.session = data.session;
+                }
+                if ("callId" in data && data.callId != undefined) {
+                    this.callId = data.callId;
+                }
+            }
+        }
+        get session() {
+            return pb_1.Message.getWrapperField(this, Session, 1) as Session;
+        }
+        set session(value: Session) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_session() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get callId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set callId(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            session?: ReturnType<typeof Session.prototype.toObject>;
+            callId?: string;
+        }): CallRequest {
+            const message = new CallRequest({});
+            if (data.session != null) {
+                message.session = Session.fromObject(data.session);
+            }
+            if (data.callId != null) {
+                message.callId = data.callId;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session?: ReturnType<typeof Session.prototype.toObject>;
+                callId?: string;
+            } = {};
+            if (this.session != null) {
+                data.session = this.session.toObject();
+            }
+            if (this.callId != null) {
+                data.callId = this.callId;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_session)
+                writer.writeMessage(1, this.session, () => this.session.serialize(writer));
+            if (this.callId.length)
+                writer.writeString(2, this.callId);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session, () => message.session = Session.deserialize(reader));
+                        break;
+                    case 2:
+                        message.callId = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallRequest {
+            return CallRequest.deserialize(bytes);
+        }
+    }
+    export class StartCallRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session?: Session;
+            phone?: string;
+            video?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session" in data && data.session != undefined) {
+                    this.session = data.session;
+                }
+                if ("phone" in data && data.phone != undefined) {
+                    this.phone = data.phone;
+                }
+                if ("video" in data && data.video != undefined) {
+                    this.video = data.video;
+                }
+            }
+        }
+        get session() {
+            return pb_1.Message.getWrapperField(this, Session, 1) as Session;
+        }
+        set session(value: Session) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_session() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get phone() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set phone(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get video() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set video(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            session?: ReturnType<typeof Session.prototype.toObject>;
+            phone?: string;
+            video?: boolean;
+        }): StartCallRequest {
+            const message = new StartCallRequest({});
+            if (data.session != null) {
+                message.session = Session.fromObject(data.session);
+            }
+            if (data.phone != null) {
+                message.phone = data.phone;
+            }
+            if (data.video != null) {
+                message.video = data.video;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session?: ReturnType<typeof Session.prototype.toObject>;
+                phone?: string;
+                video?: boolean;
+            } = {};
+            if (this.session != null) {
+                data.session = this.session.toObject();
+            }
+            if (this.phone != null) {
+                data.phone = this.phone;
+            }
+            if (this.video != null) {
+                data.video = this.video;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_session)
+                writer.writeMessage(1, this.session, () => this.session.serialize(writer));
+            if (this.phone.length)
+                writer.writeString(2, this.phone);
+            if (this.video != false)
+                writer.writeBool(3, this.video);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): StartCallRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new StartCallRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session, () => message.session = Session.deserialize(reader));
+                        break;
+                    case 2:
+                        message.phone = reader.readString();
+                        break;
+                    case 3:
+                        message.video = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): StartCallRequest {
+            return StartCallRequest.deserialize(bytes);
+        }
+    }
+    export class AnswerCallRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session?: Session;
+            callId?: string;
+            agent?: string;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session" in data && data.session != undefined) {
+                    this.session = data.session;
+                }
+                if ("callId" in data && data.callId != undefined) {
+                    this.callId = data.callId;
+                }
+                if ("agent" in data && data.agent != undefined) {
+                    this.agent = data.agent;
+                }
+            }
+        }
+        get session() {
+            return pb_1.Message.getWrapperField(this, Session, 1) as Session;
+        }
+        set session(value: Session) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_session() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get callId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set callId(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get agent() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set agent(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            session?: ReturnType<typeof Session.prototype.toObject>;
+            callId?: string;
+            agent?: string;
+        }): AnswerCallRequest {
+            const message = new AnswerCallRequest({});
+            if (data.session != null) {
+                message.session = Session.fromObject(data.session);
+            }
+            if (data.callId != null) {
+                message.callId = data.callId;
+            }
+            if (data.agent != null) {
+                message.agent = data.agent;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session?: ReturnType<typeof Session.prototype.toObject>;
+                callId?: string;
+                agent?: string;
+            } = {};
+            if (this.session != null) {
+                data.session = this.session.toObject();
+            }
+            if (this.callId != null) {
+                data.callId = this.callId;
+            }
+            if (this.agent != null) {
+                data.agent = this.agent;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_session)
+                writer.writeMessage(1, this.session, () => this.session.serialize(writer));
+            if (this.callId.length)
+                writer.writeString(2, this.callId);
+            if (this.agent.length)
+                writer.writeString(3, this.agent);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AnswerCallRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AnswerCallRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session, () => message.session = Session.deserialize(reader));
+                        break;
+                    case 2:
+                        message.callId = reader.readString();
+                        break;
+                    case 3:
+                        message.agent = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): AnswerCallRequest {
+            return AnswerCallRequest.deserialize(bytes);
+        }
+    }
+    export class MuteCallRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session?: Session;
+            callId?: string;
+            muted?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session" in data && data.session != undefined) {
+                    this.session = data.session;
+                }
+                if ("callId" in data && data.callId != undefined) {
+                    this.callId = data.callId;
+                }
+                if ("muted" in data && data.muted != undefined) {
+                    this.muted = data.muted;
+                }
+            }
+        }
+        get session() {
+            return pb_1.Message.getWrapperField(this, Session, 1) as Session;
+        }
+        set session(value: Session) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_session() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get callId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set callId(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get muted() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set muted(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            session?: ReturnType<typeof Session.prototype.toObject>;
+            callId?: string;
+            muted?: boolean;
+        }): MuteCallRequest {
+            const message = new MuteCallRequest({});
+            if (data.session != null) {
+                message.session = Session.fromObject(data.session);
+            }
+            if (data.callId != null) {
+                message.callId = data.callId;
+            }
+            if (data.muted != null) {
+                message.muted = data.muted;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session?: ReturnType<typeof Session.prototype.toObject>;
+                callId?: string;
+                muted?: boolean;
+            } = {};
+            if (this.session != null) {
+                data.session = this.session.toObject();
+            }
+            if (this.callId != null) {
+                data.callId = this.callId;
+            }
+            if (this.muted != null) {
+                data.muted = this.muted;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_session)
+                writer.writeMessage(1, this.session, () => this.session.serialize(writer));
+            if (this.callId.length)
+                writer.writeString(2, this.callId);
+            if (this.muted != false)
+                writer.writeBool(3, this.muted);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MuteCallRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MuteCallRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session, () => message.session = Session.deserialize(reader));
+                        break;
+                    case 2:
+                        message.callId = reader.readString();
+                        break;
+                    case 3:
+                        message.muted = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): MuteCallRequest {
+            return MuteCallRequest.deserialize(bytes);
+        }
+    }
+    export class SetCallVideoRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session?: Session;
+            callId?: string;
+            enabled?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session" in data && data.session != undefined) {
+                    this.session = data.session;
+                }
+                if ("callId" in data && data.callId != undefined) {
+                    this.callId = data.callId;
+                }
+                if ("enabled" in data && data.enabled != undefined) {
+                    this.enabled = data.enabled;
+                }
+            }
+        }
+        get session() {
+            return pb_1.Message.getWrapperField(this, Session, 1) as Session;
+        }
+        set session(value: Session) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_session() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get callId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set callId(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get enabled() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set enabled(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            session?: ReturnType<typeof Session.prototype.toObject>;
+            callId?: string;
+            enabled?: boolean;
+        }): SetCallVideoRequest {
+            const message = new SetCallVideoRequest({});
+            if (data.session != null) {
+                message.session = Session.fromObject(data.session);
+            }
+            if (data.callId != null) {
+                message.callId = data.callId;
+            }
+            if (data.enabled != null) {
+                message.enabled = data.enabled;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session?: ReturnType<typeof Session.prototype.toObject>;
+                callId?: string;
+                enabled?: boolean;
+            } = {};
+            if (this.session != null) {
+                data.session = this.session.toObject();
+            }
+            if (this.callId != null) {
+                data.callId = this.callId;
+            }
+            if (this.enabled != null) {
+                data.enabled = this.enabled;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_session)
+                writer.writeMessage(1, this.session, () => this.session.serialize(writer));
+            if (this.callId.length)
+                writer.writeString(2, this.callId);
+            if (this.enabled != false)
+                writer.writeBool(3, this.enabled);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SetCallVideoRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SetCallVideoRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session, () => message.session = Session.deserialize(reader));
+                        break;
+                    case 2:
+                        message.callId = reader.readString();
+                        break;
+                    case 3:
+                        message.enabled = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SetCallVideoRequest {
+            return SetCallVideoRequest.deserialize(bytes);
+        }
+    }
+    export class SetCallOrientationRequest extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            session?: Session;
+            callId?: string;
+            orientation?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("session" in data && data.session != undefined) {
+                    this.session = data.session;
+                }
+                if ("callId" in data && data.callId != undefined) {
+                    this.callId = data.callId;
+                }
+                if ("orientation" in data && data.orientation != undefined) {
+                    this.orientation = data.orientation;
+                }
+            }
+        }
+        get session() {
+            return pb_1.Message.getWrapperField(this, Session, 1) as Session;
+        }
+        set session(value: Session) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_session() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get callId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set callId(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get orientation() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set orientation(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            session?: ReturnType<typeof Session.prototype.toObject>;
+            callId?: string;
+            orientation?: number;
+        }): SetCallOrientationRequest {
+            const message = new SetCallOrientationRequest({});
+            if (data.session != null) {
+                message.session = Session.fromObject(data.session);
+            }
+            if (data.callId != null) {
+                message.callId = data.callId;
+            }
+            if (data.orientation != null) {
+                message.orientation = data.orientation;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                session?: ReturnType<typeof Session.prototype.toObject>;
+                callId?: string;
+                orientation?: number;
+            } = {};
+            if (this.session != null) {
+                data.session = this.session.toObject();
+            }
+            if (this.callId != null) {
+                data.callId = this.callId;
+            }
+            if (this.orientation != null) {
+                data.orientation = this.orientation;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_session)
+                writer.writeMessage(1, this.session, () => this.session.serialize(writer));
+            if (this.callId.length)
+                writer.writeString(2, this.callId);
+            if (this.orientation != 0)
+                writer.writeInt32(3, this.orientation);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SetCallOrientationRequest {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SetCallOrientationRequest();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.session, () => message.session = Session.deserialize(reader));
+                        break;
+                    case 2:
+                        message.callId = reader.readString();
+                        break;
+                    case 3:
+                        message.orientation = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): SetCallOrientationRequest {
+            return SetCallOrientationRequest.deserialize(bytes);
+        }
+    }
+    export class CallAudioIn extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            attach?: CallRequest;
+            pcm?: Uint8Array;
+            flush?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("attach" in data && data.attach != undefined) {
+                    this.attach = data.attach;
+                }
+                if ("pcm" in data && data.pcm != undefined) {
+                    this.pcm = data.pcm;
+                }
+                if ("flush" in data && data.flush != undefined) {
+                    this.flush = data.flush;
+                }
+            }
+        }
+        get attach() {
+            return pb_1.Message.getWrapperField(this, CallRequest, 1) as CallRequest;
+        }
+        set attach(value: CallRequest) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_attach() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get pcm() {
+            return pb_1.Message.getFieldWithDefault(this, 2, new Uint8Array(0)) as Uint8Array;
+        }
+        set pcm(value: Uint8Array) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get flush() {
+            return pb_1.Message.getFieldWithDefault(this, 3, false) as boolean;
+        }
+        set flush(value: boolean) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            attach?: ReturnType<typeof CallRequest.prototype.toObject>;
+            pcm?: Uint8Array;
+            flush?: boolean;
+        }): CallAudioIn {
+            const message = new CallAudioIn({});
+            if (data.attach != null) {
+                message.attach = CallRequest.fromObject(data.attach);
+            }
+            if (data.pcm != null) {
+                message.pcm = data.pcm;
+            }
+            if (data.flush != null) {
+                message.flush = data.flush;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                attach?: ReturnType<typeof CallRequest.prototype.toObject>;
+                pcm?: Uint8Array;
+                flush?: boolean;
+            } = {};
+            if (this.attach != null) {
+                data.attach = this.attach.toObject();
+            }
+            if (this.pcm != null) {
+                data.pcm = this.pcm;
+            }
+            if (this.flush != null) {
+                data.flush = this.flush;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_attach)
+                writer.writeMessage(1, this.attach, () => this.attach.serialize(writer));
+            if (this.pcm.length)
+                writer.writeBytes(2, this.pcm);
+            if (this.flush != false)
+                writer.writeBool(3, this.flush);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallAudioIn {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallAudioIn();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.attach, () => message.attach = CallRequest.deserialize(reader));
+                        break;
+                    case 2:
+                        message.pcm = reader.readBytes();
+                        break;
+                    case 3:
+                        message.flush = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallAudioIn {
+            return CallAudioIn.deserialize(bytes);
+        }
+    }
+    export class CallAudioStats extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            inFrames?: number;
+            outFrames?: number;
+            inPeak?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("inFrames" in data && data.inFrames != undefined) {
+                    this.inFrames = data.inFrames;
+                }
+                if ("outFrames" in data && data.outFrames != undefined) {
+                    this.outFrames = data.outFrames;
+                }
+                if ("inPeak" in data && data.inPeak != undefined) {
+                    this.inPeak = data.inPeak;
+                }
+            }
+        }
+        get inFrames() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set inFrames(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get outFrames() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set outFrames(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get inPeak() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set inPeak(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        static fromObject(data: {
+            inFrames?: number;
+            outFrames?: number;
+            inPeak?: number;
+        }): CallAudioStats {
+            const message = new CallAudioStats({});
+            if (data.inFrames != null) {
+                message.inFrames = data.inFrames;
+            }
+            if (data.outFrames != null) {
+                message.outFrames = data.outFrames;
+            }
+            if (data.inPeak != null) {
+                message.inPeak = data.inPeak;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                inFrames?: number;
+                outFrames?: number;
+                inPeak?: number;
+            } = {};
+            if (this.inFrames != null) {
+                data.inFrames = this.inFrames;
+            }
+            if (this.outFrames != null) {
+                data.outFrames = this.outFrames;
+            }
+            if (this.inPeak != null) {
+                data.inPeak = this.inPeak;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.inFrames != 0)
+                writer.writeInt64(1, this.inFrames);
+            if (this.outFrames != 0)
+                writer.writeInt64(2, this.outFrames);
+            if (this.inPeak != 0)
+                writer.writeDouble(3, this.inPeak);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallAudioStats {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallAudioStats();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.inFrames = reader.readInt64();
+                        break;
+                    case 2:
+                        message.outFrames = reader.readInt64();
+                        break;
+                    case 3:
+                        message.inPeak = reader.readDouble();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallAudioStats {
+            return CallAudioStats.deserialize(bytes);
+        }
+    }
+    export class CallAudioOut extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            pcm?: Uint8Array;
+            stats?: CallAudioStats;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("pcm" in data && data.pcm != undefined) {
+                    this.pcm = data.pcm;
+                }
+                if ("stats" in data && data.stats != undefined) {
+                    this.stats = data.stats;
+                }
+            }
+        }
+        get pcm() {
+            return pb_1.Message.getFieldWithDefault(this, 1, new Uint8Array(0)) as Uint8Array;
+        }
+        set pcm(value: Uint8Array) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get stats() {
+            return pb_1.Message.getWrapperField(this, CallAudioStats, 2) as CallAudioStats;
+        }
+        set stats(value: CallAudioStats) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_stats() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        static fromObject(data: {
+            pcm?: Uint8Array;
+            stats?: ReturnType<typeof CallAudioStats.prototype.toObject>;
+        }): CallAudioOut {
+            const message = new CallAudioOut({});
+            if (data.pcm != null) {
+                message.pcm = data.pcm;
+            }
+            if (data.stats != null) {
+                message.stats = CallAudioStats.fromObject(data.stats);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                pcm?: Uint8Array;
+                stats?: ReturnType<typeof CallAudioStats.prototype.toObject>;
+            } = {};
+            if (this.pcm != null) {
+                data.pcm = this.pcm;
+            }
+            if (this.stats != null) {
+                data.stats = this.stats.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.pcm.length)
+                writer.writeBytes(1, this.pcm);
+            if (this.has_stats)
+                writer.writeMessage(2, this.stats, () => this.stats.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallAudioOut {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallAudioOut();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.pcm = reader.readBytes();
+                        break;
+                    case 2:
+                        reader.readMessage(message.stats, () => message.stats = CallAudioStats.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallAudioOut {
+            return CallAudioOut.deserialize(bytes);
+        }
+    }
+    export class CallVideoIn extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            attach?: CallRequest;
+            accessUnit?: Uint8Array;
+            durationMs?: number;
+            orientation?: number;
+            setOrientation?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("attach" in data && data.attach != undefined) {
+                    this.attach = data.attach;
+                }
+                if ("accessUnit" in data && data.accessUnit != undefined) {
+                    this.accessUnit = data.accessUnit;
+                }
+                if ("durationMs" in data && data.durationMs != undefined) {
+                    this.durationMs = data.durationMs;
+                }
+                if ("orientation" in data && data.orientation != undefined) {
+                    this.orientation = data.orientation;
+                }
+                if ("setOrientation" in data && data.setOrientation != undefined) {
+                    this.setOrientation = data.setOrientation;
+                }
+            }
+        }
+        get attach() {
+            return pb_1.Message.getWrapperField(this, CallRequest, 1) as CallRequest;
+        }
+        set attach(value: CallRequest) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_attach() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get accessUnit() {
+            return pb_1.Message.getFieldWithDefault(this, 2, new Uint8Array(0)) as Uint8Array;
+        }
+        set accessUnit(value: Uint8Array) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get durationMs() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set durationMs(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get orientation() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set orientation(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get setOrientation() {
+            return pb_1.Message.getFieldWithDefault(this, 5, false) as boolean;
+        }
+        set setOrientation(value: boolean) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        static fromObject(data: {
+            attach?: ReturnType<typeof CallRequest.prototype.toObject>;
+            accessUnit?: Uint8Array;
+            durationMs?: number;
+            orientation?: number;
+            setOrientation?: boolean;
+        }): CallVideoIn {
+            const message = new CallVideoIn({});
+            if (data.attach != null) {
+                message.attach = CallRequest.fromObject(data.attach);
+            }
+            if (data.accessUnit != null) {
+                message.accessUnit = data.accessUnit;
+            }
+            if (data.durationMs != null) {
+                message.durationMs = data.durationMs;
+            }
+            if (data.orientation != null) {
+                message.orientation = data.orientation;
+            }
+            if (data.setOrientation != null) {
+                message.setOrientation = data.setOrientation;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                attach?: ReturnType<typeof CallRequest.prototype.toObject>;
+                accessUnit?: Uint8Array;
+                durationMs?: number;
+                orientation?: number;
+                setOrientation?: boolean;
+            } = {};
+            if (this.attach != null) {
+                data.attach = this.attach.toObject();
+            }
+            if (this.accessUnit != null) {
+                data.accessUnit = this.accessUnit;
+            }
+            if (this.durationMs != null) {
+                data.durationMs = this.durationMs;
+            }
+            if (this.orientation != null) {
+                data.orientation = this.orientation;
+            }
+            if (this.setOrientation != null) {
+                data.setOrientation = this.setOrientation;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_attach)
+                writer.writeMessage(1, this.attach, () => this.attach.serialize(writer));
+            if (this.accessUnit.length)
+                writer.writeBytes(2, this.accessUnit);
+            if (this.durationMs != 0)
+                writer.writeUint32(3, this.durationMs);
+            if (this.orientation != 0)
+                writer.writeInt32(4, this.orientation);
+            if (this.setOrientation != false)
+                writer.writeBool(5, this.setOrientation);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallVideoIn {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallVideoIn();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.attach, () => message.attach = CallRequest.deserialize(reader));
+                        break;
+                    case 2:
+                        message.accessUnit = reader.readBytes();
+                        break;
+                    case 3:
+                        message.durationMs = reader.readUint32();
+                        break;
+                    case 4:
+                        message.orientation = reader.readInt32();
+                        break;
+                    case 5:
+                        message.setOrientation = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallVideoIn {
+            return CallVideoIn.deserialize(bytes);
+        }
+    }
+    export class CallVideoOut extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            accessUnit?: Uint8Array;
+            keyframe?: boolean;
+            orientation?: number;
+            control?: string;
+            active?: boolean;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("accessUnit" in data && data.accessUnit != undefined) {
+                    this.accessUnit = data.accessUnit;
+                }
+                if ("keyframe" in data && data.keyframe != undefined) {
+                    this.keyframe = data.keyframe;
+                }
+                if ("orientation" in data && data.orientation != undefined) {
+                    this.orientation = data.orientation;
+                }
+                if ("control" in data && data.control != undefined) {
+                    this.control = data.control;
+                }
+                if ("active" in data && data.active != undefined) {
+                    this.active = data.active;
+                }
+            }
+        }
+        get accessUnit() {
+            return pb_1.Message.getFieldWithDefault(this, 1, new Uint8Array(0)) as Uint8Array;
+        }
+        set accessUnit(value: Uint8Array) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get keyframe() {
+            return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+        }
+        set keyframe(value: boolean) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get orientation() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set orientation(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get control() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set control(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get active() {
+            return pb_1.Message.getFieldWithDefault(this, 5, false) as boolean;
+        }
+        set active(value: boolean) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        static fromObject(data: {
+            accessUnit?: Uint8Array;
+            keyframe?: boolean;
+            orientation?: number;
+            control?: string;
+            active?: boolean;
+        }): CallVideoOut {
+            const message = new CallVideoOut({});
+            if (data.accessUnit != null) {
+                message.accessUnit = data.accessUnit;
+            }
+            if (data.keyframe != null) {
+                message.keyframe = data.keyframe;
+            }
+            if (data.orientation != null) {
+                message.orientation = data.orientation;
+            }
+            if (data.control != null) {
+                message.control = data.control;
+            }
+            if (data.active != null) {
+                message.active = data.active;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                accessUnit?: Uint8Array;
+                keyframe?: boolean;
+                orientation?: number;
+                control?: string;
+                active?: boolean;
+            } = {};
+            if (this.accessUnit != null) {
+                data.accessUnit = this.accessUnit;
+            }
+            if (this.keyframe != null) {
+                data.keyframe = this.keyframe;
+            }
+            if (this.orientation != null) {
+                data.orientation = this.orientation;
+            }
+            if (this.control != null) {
+                data.control = this.control;
+            }
+            if (this.active != null) {
+                data.active = this.active;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.accessUnit.length)
+                writer.writeBytes(1, this.accessUnit);
+            if (this.keyframe != false)
+                writer.writeBool(2, this.keyframe);
+            if (this.orientation != 0)
+                writer.writeInt32(3, this.orientation);
+            if (this.control.length)
+                writer.writeString(4, this.control);
+            if (this.active != false)
+                writer.writeBool(5, this.active);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): CallVideoOut {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new CallVideoOut();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.accessUnit = reader.readBytes();
+                        break;
+                    case 2:
+                        message.keyframe = reader.readBool();
+                        break;
+                    case 3:
+                        message.orientation = reader.readInt32();
+                        break;
+                    case 4:
+                        message.control = reader.readString();
+                        break;
+                    case 5:
+                        message.active = reader.readBool();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): CallVideoOut {
+            return CallVideoOut.deserialize(bytes);
+        }
+    }
     export class PollMessage extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -11800,6 +13732,123 @@ export namespace messages {
                 responseSerialize: (message: Empty) => Buffer.from(message.serialize()),
                 responseDeserialize: (bytes: Buffer) => Empty.deserialize(new Uint8Array(bytes))
             },
+            GetCallSettings: {
+                path: "/messages.MessageService/GetCallSettings",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: Session) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => Session.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallSettings) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallSettings.deserialize(new Uint8Array(bytes))
+            },
+            SetCallSettings: {
+                path: "/messages.MessageService/SetCallSettings",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: SetCallSettingsRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => SetCallSettingsRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallSettings) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallSettings.deserialize(new Uint8Array(bytes))
+            },
+            ListCalls: {
+                path: "/messages.MessageService/ListCalls",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: Session) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => Session.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallInfoList) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallInfoList.deserialize(new Uint8Array(bytes))
+            },
+            GetCall: {
+                path: "/messages.MessageService/GetCall",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: CallRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => CallRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallInfo) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallInfo.deserialize(new Uint8Array(bytes))
+            },
+            StartCall: {
+                path: "/messages.MessageService/StartCall",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: StartCallRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => StartCallRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallInfo) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallInfo.deserialize(new Uint8Array(bytes))
+            },
+            AnswerCall: {
+                path: "/messages.MessageService/AnswerCall",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: AnswerCallRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => AnswerCallRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallInfo) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallInfo.deserialize(new Uint8Array(bytes))
+            },
+            RejectManagedCall: {
+                path: "/messages.MessageService/RejectManagedCall",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: CallRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => CallRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => Empty.deserialize(new Uint8Array(bytes))
+            },
+            HangupCall: {
+                path: "/messages.MessageService/HangupCall",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: CallRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => CallRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => Empty.deserialize(new Uint8Array(bytes))
+            },
+            MuteCall: {
+                path: "/messages.MessageService/MuteCall",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: MuteCallRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => MuteCallRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallInfo) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallInfo.deserialize(new Uint8Array(bytes))
+            },
+            SetCallVideo: {
+                path: "/messages.MessageService/SetCallVideo",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: SetCallVideoRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => SetCallVideoRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallInfo) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallInfo.deserialize(new Uint8Array(bytes))
+            },
+            SetCallOrientation: {
+                path: "/messages.MessageService/SetCallOrientation",
+                requestStream: false,
+                responseStream: false,
+                requestSerialize: (message: SetCallOrientationRequest) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => SetCallOrientationRequest.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: Empty) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => Empty.deserialize(new Uint8Array(bytes))
+            },
+            CallAudio: {
+                path: "/messages.MessageService/CallAudio",
+                requestStream: true,
+                responseStream: true,
+                requestSerialize: (message: CallAudioIn) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => CallAudioIn.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallAudioOut) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallAudioOut.deserialize(new Uint8Array(bytes))
+            },
+            CallVideo: {
+                path: "/messages.MessageService/CallVideo",
+                requestStream: true,
+                responseStream: true,
+                requestSerialize: (message: CallVideoIn) => Buffer.from(message.serialize()),
+                requestDeserialize: (bytes: Buffer) => CallVideoIn.deserialize(new Uint8Array(bytes)),
+                responseSerialize: (message: CallVideoOut) => Buffer.from(message.serialize()),
+                responseDeserialize: (bytes: Buffer) => CallVideoOut.deserialize(new Uint8Array(bytes))
+            },
             GetMessageById: {
                 path: "/messages.MessageService/GetMessageById",
                 requestStream: false,
@@ -11895,6 +13944,19 @@ export namespace messages {
         abstract CancelEventMessage(call: grpc_1.ServerUnaryCall<CancelEventMessageRequest, MessageResponse>, callback: grpc_1.sendUnaryData<MessageResponse>): void;
         abstract DownloadMedia(call: grpc_1.ServerUnaryCall<DownloadMediaRequest, DownloadMediaResponse>, callback: grpc_1.sendUnaryData<DownloadMediaResponse>): void;
         abstract RejectCall(call: grpc_1.ServerUnaryCall<RejectCallRequest, Empty>, callback: grpc_1.sendUnaryData<Empty>): void;
+        abstract GetCallSettings(call: grpc_1.ServerUnaryCall<Session, CallSettings>, callback: grpc_1.sendUnaryData<CallSettings>): void;
+        abstract SetCallSettings(call: grpc_1.ServerUnaryCall<SetCallSettingsRequest, CallSettings>, callback: grpc_1.sendUnaryData<CallSettings>): void;
+        abstract ListCalls(call: grpc_1.ServerUnaryCall<Session, CallInfoList>, callback: grpc_1.sendUnaryData<CallInfoList>): void;
+        abstract GetCall(call: grpc_1.ServerUnaryCall<CallRequest, CallInfo>, callback: grpc_1.sendUnaryData<CallInfo>): void;
+        abstract StartCall(call: grpc_1.ServerUnaryCall<StartCallRequest, CallInfo>, callback: grpc_1.sendUnaryData<CallInfo>): void;
+        abstract AnswerCall(call: grpc_1.ServerUnaryCall<AnswerCallRequest, CallInfo>, callback: grpc_1.sendUnaryData<CallInfo>): void;
+        abstract RejectManagedCall(call: grpc_1.ServerUnaryCall<CallRequest, Empty>, callback: grpc_1.sendUnaryData<Empty>): void;
+        abstract HangupCall(call: grpc_1.ServerUnaryCall<CallRequest, Empty>, callback: grpc_1.sendUnaryData<Empty>): void;
+        abstract MuteCall(call: grpc_1.ServerUnaryCall<MuteCallRequest, CallInfo>, callback: grpc_1.sendUnaryData<CallInfo>): void;
+        abstract SetCallVideo(call: grpc_1.ServerUnaryCall<SetCallVideoRequest, CallInfo>, callback: grpc_1.sendUnaryData<CallInfo>): void;
+        abstract SetCallOrientation(call: grpc_1.ServerUnaryCall<SetCallOrientationRequest, Empty>, callback: grpc_1.sendUnaryData<Empty>): void;
+        abstract CallAudio(call: grpc_1.ServerDuplexStream<CallAudioIn, CallAudioOut>): void;
+        abstract CallVideo(call: grpc_1.ServerDuplexStream<CallVideoIn, CallVideoOut>): void;
         abstract GetMessageById(call: grpc_1.ServerUnaryCall<EntityByIdRequest, Json>, callback: grpc_1.sendUnaryData<Json>): void;
         abstract GetMessages(call: grpc_1.ServerUnaryCall<GetMessagesRequest, JsonList>, callback: grpc_1.sendUnaryData<JsonList>): void;
         abstract GetChats(call: grpc_1.ServerUnaryCall<GetChatsRequest, JsonList>, callback: grpc_1.sendUnaryData<JsonList>): void;
@@ -12100,6 +14162,45 @@ export namespace messages {
         };
         RejectCall: GrpcUnaryServiceInterface<RejectCallRequest, Empty> = (message: RejectCallRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<Empty>, callback?: grpc_1.requestCallback<Empty>): grpc_1.ClientUnaryCall => {
             return super.RejectCall(message, metadata, options, callback);
+        };
+        GetCallSettings: GrpcUnaryServiceInterface<Session, CallSettings> = (message: Session, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallSettings>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallSettings>, callback?: grpc_1.requestCallback<CallSettings>): grpc_1.ClientUnaryCall => {
+            return super.GetCallSettings(message, metadata, options, callback);
+        };
+        SetCallSettings: GrpcUnaryServiceInterface<SetCallSettingsRequest, CallSettings> = (message: SetCallSettingsRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallSettings>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallSettings>, callback?: grpc_1.requestCallback<CallSettings>): grpc_1.ClientUnaryCall => {
+            return super.SetCallSettings(message, metadata, options, callback);
+        };
+        ListCalls: GrpcUnaryServiceInterface<Session, CallInfoList> = (message: Session, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallInfoList>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallInfoList>, callback?: grpc_1.requestCallback<CallInfoList>): grpc_1.ClientUnaryCall => {
+            return super.ListCalls(message, metadata, options, callback);
+        };
+        GetCall: GrpcUnaryServiceInterface<CallRequest, CallInfo> = (message: CallRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, callback?: grpc_1.requestCallback<CallInfo>): grpc_1.ClientUnaryCall => {
+            return super.GetCall(message, metadata, options, callback);
+        };
+        StartCall: GrpcUnaryServiceInterface<StartCallRequest, CallInfo> = (message: StartCallRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, callback?: grpc_1.requestCallback<CallInfo>): grpc_1.ClientUnaryCall => {
+            return super.StartCall(message, metadata, options, callback);
+        };
+        AnswerCall: GrpcUnaryServiceInterface<AnswerCallRequest, CallInfo> = (message: AnswerCallRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, callback?: grpc_1.requestCallback<CallInfo>): grpc_1.ClientUnaryCall => {
+            return super.AnswerCall(message, metadata, options, callback);
+        };
+        RejectManagedCall: GrpcUnaryServiceInterface<CallRequest, Empty> = (message: CallRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<Empty>, callback?: grpc_1.requestCallback<Empty>): grpc_1.ClientUnaryCall => {
+            return super.RejectManagedCall(message, metadata, options, callback);
+        };
+        HangupCall: GrpcUnaryServiceInterface<CallRequest, Empty> = (message: CallRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<Empty>, callback?: grpc_1.requestCallback<Empty>): grpc_1.ClientUnaryCall => {
+            return super.HangupCall(message, metadata, options, callback);
+        };
+        MuteCall: GrpcUnaryServiceInterface<MuteCallRequest, CallInfo> = (message: MuteCallRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, callback?: grpc_1.requestCallback<CallInfo>): grpc_1.ClientUnaryCall => {
+            return super.MuteCall(message, metadata, options, callback);
+        };
+        SetCallVideo: GrpcUnaryServiceInterface<SetCallVideoRequest, CallInfo> = (message: SetCallVideoRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, options?: grpc_1.CallOptions | grpc_1.requestCallback<CallInfo>, callback?: grpc_1.requestCallback<CallInfo>): grpc_1.ClientUnaryCall => {
+            return super.SetCallVideo(message, metadata, options, callback);
+        };
+        SetCallOrientation: GrpcUnaryServiceInterface<SetCallOrientationRequest, Empty> = (message: SetCallOrientationRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<Empty>, options?: grpc_1.CallOptions | grpc_1.requestCallback<Empty>, callback?: grpc_1.requestCallback<Empty>): grpc_1.ClientUnaryCall => {
+            return super.SetCallOrientation(message, metadata, options, callback);
+        };
+        CallAudio: GrpcChunkServiceInterface<CallAudioIn, CallAudioOut> = (metadata?: grpc_1.Metadata | grpc_1.CallOptions, options?: grpc_1.CallOptions): grpc_1.ClientDuplexStream<CallAudioIn, CallAudioOut> => {
+            return super.CallAudio(metadata, options);
+        };
+        CallVideo: GrpcChunkServiceInterface<CallVideoIn, CallVideoOut> = (metadata?: grpc_1.Metadata | grpc_1.CallOptions, options?: grpc_1.CallOptions): grpc_1.ClientDuplexStream<CallVideoIn, CallVideoOut> => {
+            return super.CallVideo(metadata, options);
         };
         GetMessageById: GrpcUnaryServiceInterface<EntityByIdRequest, Json> = (message: EntityByIdRequest, metadata: grpc_1.Metadata | grpc_1.CallOptions | grpc_1.requestCallback<Json>, options?: grpc_1.CallOptions | grpc_1.requestCallback<Json>, callback?: grpc_1.requestCallback<Json>): grpc_1.ClientUnaryCall => {
             return super.GetMessageById(message, metadata, options, callback);

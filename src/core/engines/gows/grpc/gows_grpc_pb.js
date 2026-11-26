@@ -4,6 +4,17 @@
 var grpc = require('@grpc/grpc-js');
 var gows_pb = require('./gows_pb.js');
 
+function serialize_messages_AnswerCallRequest(arg) {
+  if (!(arg instanceof gows_pb.AnswerCallRequest)) {
+    throw new Error('Expected argument of type messages.AnswerCallRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_AnswerCallRequest(buffer_arg) {
+  return gows_pb.AnswerCallRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_messages_ButtonReplyRequest(arg) {
   if (!(arg instanceof gows_pb.ButtonReplyRequest)) {
     throw new Error('Expected argument of type messages.ButtonReplyRequest');
@@ -13,6 +24,94 @@ function serialize_messages_ButtonReplyRequest(arg) {
 
 function deserialize_messages_ButtonReplyRequest(buffer_arg) {
   return gows_pb.ButtonReplyRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallAudioIn(arg) {
+  if (!(arg instanceof gows_pb.CallAudioIn)) {
+    throw new Error('Expected argument of type messages.CallAudioIn');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallAudioIn(buffer_arg) {
+  return gows_pb.CallAudioIn.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallAudioOut(arg) {
+  if (!(arg instanceof gows_pb.CallAudioOut)) {
+    throw new Error('Expected argument of type messages.CallAudioOut');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallAudioOut(buffer_arg) {
+  return gows_pb.CallAudioOut.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallInfo(arg) {
+  if (!(arg instanceof gows_pb.CallInfo)) {
+    throw new Error('Expected argument of type messages.CallInfo');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallInfo(buffer_arg) {
+  return gows_pb.CallInfo.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallInfoList(arg) {
+  if (!(arg instanceof gows_pb.CallInfoList)) {
+    throw new Error('Expected argument of type messages.CallInfoList');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallInfoList(buffer_arg) {
+  return gows_pb.CallInfoList.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallRequest(arg) {
+  if (!(arg instanceof gows_pb.CallRequest)) {
+    throw new Error('Expected argument of type messages.CallRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallRequest(buffer_arg) {
+  return gows_pb.CallRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallSettings(arg) {
+  if (!(arg instanceof gows_pb.CallSettings)) {
+    throw new Error('Expected argument of type messages.CallSettings');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallSettings(buffer_arg) {
+  return gows_pb.CallSettings.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallVideoIn(arg) {
+  if (!(arg instanceof gows_pb.CallVideoIn)) {
+    throw new Error('Expected argument of type messages.CallVideoIn');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallVideoIn(buffer_arg) {
+  return gows_pb.CallVideoIn.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_CallVideoOut(arg) {
+  if (!(arg instanceof gows_pb.CallVideoOut)) {
+    throw new Error('Expected argument of type messages.CallVideoOut');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_CallVideoOut(buffer_arg) {
+  return gows_pb.CallVideoOut.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_messages_CancelEventMessageRequest(arg) {
@@ -356,6 +455,17 @@ function deserialize_messages_MessageResponse(buffer_arg) {
   return gows_pb.MessageResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_messages_MuteCallRequest(arg) {
+  if (!(arg instanceof gows_pb.MuteCallRequest)) {
+    throw new Error('Expected argument of type messages.MuteCallRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_MuteCallRequest(buffer_arg) {
+  return gows_pb.MuteCallRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_messages_NewMessageIDResponse(arg) {
   if (!(arg instanceof gows_pb.NewMessageIDResponse)) {
     throw new Error('Expected argument of type messages.NewMessageIDResponse');
@@ -620,6 +730,39 @@ function deserialize_messages_SessionStateResponse(buffer_arg) {
   return gows_pb.SessionStateResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_messages_SetCallOrientationRequest(arg) {
+  if (!(arg instanceof gows_pb.SetCallOrientationRequest)) {
+    throw new Error('Expected argument of type messages.SetCallOrientationRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_SetCallOrientationRequest(buffer_arg) {
+  return gows_pb.SetCallOrientationRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_SetCallSettingsRequest(arg) {
+  if (!(arg instanceof gows_pb.SetCallSettingsRequest)) {
+    throw new Error('Expected argument of type messages.SetCallSettingsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_SetCallSettingsRequest(buffer_arg) {
+  return gows_pb.SetCallSettingsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_SetCallVideoRequest(arg) {
+  if (!(arg instanceof gows_pb.SetCallVideoRequest)) {
+    throw new Error('Expected argument of type messages.SetCallVideoRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_SetCallVideoRequest(buffer_arg) {
+  return gows_pb.SetCallVideoRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_messages_SetPictureRequest(arg) {
   if (!(arg instanceof gows_pb.SetPictureRequest)) {
     throw new Error('Expected argument of type messages.SetPictureRequest');
@@ -640,6 +783,17 @@ function serialize_messages_SetProfilePictureRequest(arg) {
 
 function deserialize_messages_SetProfilePictureRequest(buffer_arg) {
   return gows_pb.SetProfilePictureRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_messages_StartCallRequest(arg) {
+  if (!(arg instanceof gows_pb.StartCallRequest)) {
+    throw new Error('Expected argument of type messages.StartCallRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_messages_StartCallRequest(buffer_arg) {
+  return gows_pb.StartCallRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_messages_StartSessionRequest(arg) {
@@ -1497,6 +1651,151 @@ rejectCall: {
     requestDeserialize: deserialize_messages_RejectCallRequest,
     responseSerialize: serialize_messages_Empty,
     responseDeserialize: deserialize_messages_Empty,
+  },
+  // Managed calls (meowcaller); off unless WAHA_GOWS_CALLS_ENABLED and SetCallSettings.
+getCallSettings: {
+    path: '/messages.MessageService/GetCallSettings',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.Session,
+    responseType: gows_pb.CallSettings,
+    requestSerialize: serialize_messages_Session,
+    requestDeserialize: deserialize_messages_Session,
+    responseSerialize: serialize_messages_CallSettings,
+    responseDeserialize: deserialize_messages_CallSettings,
+  },
+  setCallSettings: {
+    path: '/messages.MessageService/SetCallSettings',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.SetCallSettingsRequest,
+    responseType: gows_pb.CallSettings,
+    requestSerialize: serialize_messages_SetCallSettingsRequest,
+    requestDeserialize: deserialize_messages_SetCallSettingsRequest,
+    responseSerialize: serialize_messages_CallSettings,
+    responseDeserialize: deserialize_messages_CallSettings,
+  },
+  listCalls: {
+    path: '/messages.MessageService/ListCalls',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.Session,
+    responseType: gows_pb.CallInfoList,
+    requestSerialize: serialize_messages_Session,
+    requestDeserialize: deserialize_messages_Session,
+    responseSerialize: serialize_messages_CallInfoList,
+    responseDeserialize: deserialize_messages_CallInfoList,
+  },
+  getCall: {
+    path: '/messages.MessageService/GetCall',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.CallRequest,
+    responseType: gows_pb.CallInfo,
+    requestSerialize: serialize_messages_CallRequest,
+    requestDeserialize: deserialize_messages_CallRequest,
+    responseSerialize: serialize_messages_CallInfo,
+    responseDeserialize: deserialize_messages_CallInfo,
+  },
+  startCall: {
+    path: '/messages.MessageService/StartCall',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.StartCallRequest,
+    responseType: gows_pb.CallInfo,
+    requestSerialize: serialize_messages_StartCallRequest,
+    requestDeserialize: deserialize_messages_StartCallRequest,
+    responseSerialize: serialize_messages_CallInfo,
+    responseDeserialize: deserialize_messages_CallInfo,
+  },
+  answerCall: {
+    path: '/messages.MessageService/AnswerCall',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.AnswerCallRequest,
+    responseType: gows_pb.CallInfo,
+    requestSerialize: serialize_messages_AnswerCallRequest,
+    requestDeserialize: deserialize_messages_AnswerCallRequest,
+    responseSerialize: serialize_messages_CallInfo,
+    responseDeserialize: deserialize_messages_CallInfo,
+  },
+  rejectManagedCall: {
+    path: '/messages.MessageService/RejectManagedCall',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.CallRequest,
+    responseType: gows_pb.Empty,
+    requestSerialize: serialize_messages_CallRequest,
+    requestDeserialize: deserialize_messages_CallRequest,
+    responseSerialize: serialize_messages_Empty,
+    responseDeserialize: deserialize_messages_Empty,
+  },
+  hangupCall: {
+    path: '/messages.MessageService/HangupCall',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.CallRequest,
+    responseType: gows_pb.Empty,
+    requestSerialize: serialize_messages_CallRequest,
+    requestDeserialize: deserialize_messages_CallRequest,
+    responseSerialize: serialize_messages_Empty,
+    responseDeserialize: deserialize_messages_Empty,
+  },
+  muteCall: {
+    path: '/messages.MessageService/MuteCall',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.MuteCallRequest,
+    responseType: gows_pb.CallInfo,
+    requestSerialize: serialize_messages_MuteCallRequest,
+    requestDeserialize: deserialize_messages_MuteCallRequest,
+    responseSerialize: serialize_messages_CallInfo,
+    responseDeserialize: deserialize_messages_CallInfo,
+  },
+  setCallVideo: {
+    path: '/messages.MessageService/SetCallVideo',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.SetCallVideoRequest,
+    responseType: gows_pb.CallInfo,
+    requestSerialize: serialize_messages_SetCallVideoRequest,
+    requestDeserialize: deserialize_messages_SetCallVideoRequest,
+    responseSerialize: serialize_messages_CallInfo,
+    responseDeserialize: deserialize_messages_CallInfo,
+  },
+  setCallOrientation: {
+    path: '/messages.MessageService/SetCallOrientation',
+    requestStream: false,
+    responseStream: false,
+    requestType: gows_pb.SetCallOrientationRequest,
+    responseType: gows_pb.Empty,
+    requestSerialize: serialize_messages_SetCallOrientationRequest,
+    requestDeserialize: deserialize_messages_SetCallOrientationRequest,
+    responseSerialize: serialize_messages_Empty,
+    responseDeserialize: deserialize_messages_Empty,
+  },
+  // Media: the first client message names the call; later ones carry media.
+callAudio: {
+    path: '/messages.MessageService/CallAudio',
+    requestStream: true,
+    responseStream: true,
+    requestType: gows_pb.CallAudioIn,
+    responseType: gows_pb.CallAudioOut,
+    requestSerialize: serialize_messages_CallAudioIn,
+    requestDeserialize: deserialize_messages_CallAudioIn,
+    responseSerialize: serialize_messages_CallAudioOut,
+    responseDeserialize: deserialize_messages_CallAudioOut,
+  },
+  callVideo: {
+    path: '/messages.MessageService/CallVideo',
+    requestStream: true,
+    responseStream: true,
+    requestType: gows_pb.CallVideoIn,
+    responseType: gows_pb.CallVideoOut,
+    requestSerialize: serialize_messages_CallVideoIn,
+    requestDeserialize: deserialize_messages_CallVideoIn,
+    responseSerialize: serialize_messages_CallVideoOut,
+    responseDeserialize: deserialize_messages_CallVideoOut,
   },
   //
 // Storage

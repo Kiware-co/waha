@@ -12,6 +12,8 @@ import { CallData } from '@waha/structures/calls.dto';
 import { MessageTextRequest } from '@waha/structures/chatting.dto';
 import { sleep } from '@waha/utils/promiseTimeout';
 
+const MANAGED_CALL_LOOKUP_DELAY_MS = 500;
+
 export class CallsListener {
   private subscription?: Subscription;
   private config: CallsAppConfig;
@@ -91,6 +93,14 @@ export class CallsListener {
       return;
     }
 
+    if (shouldReject && (await this.isManagedCall(call))) {
+      this.log.info(
+        { callId: call.id },
+        'Call is handled by the calls engine (allowed number), not auto-rejecting',
+      );
+      return;
+    }
+
     if (shouldReject) {
       const waitBeforeDeclineMs = (config.waitBeforeDecline ?? 0) * 1000;
       await sleep(waitBeforeDeclineMs);
@@ -101,6 +111,28 @@ export class CallsListener {
       const waitBeforeResponseMs = (config.waitBeforeResponse ?? 0) * 1000;
       await sleep(waitBeforeResponseMs);
       await this.replyWithTyping(call.from, message);
+    }
+  }
+
+  /**
+   * With managed calls on, an offer from an allowed number is taken by the engine
+   * and must not be auto-rejected.
+   */
+  private async isManagedCall(call: CallData): Promise<boolean> {
+    if (!this.session.sessionConfig?.calls?.enabled) {
+      return false;
+    }
+    // The engine tracks the offer on the same event; give the stream a moment.
+    await sleep(MANAGED_CALL_LOOKUP_DELAY_MS);
+    try {
+      const calls = await this.session.listCalls();
+      return calls.some((managed) => managed.callId === call.id);
+    } catch (err) {
+      this.log.warn(
+        { err: err, callId: call.id },
+        'Could not list managed calls',
+      );
+      return false;
     }
   }
 

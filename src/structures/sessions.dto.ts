@@ -237,6 +237,16 @@ export class ClientSessionConfig {
   browserName?: string;
 }
 
+export class CallsSessionConfig {
+  @IsBoolean()
+  enabled: boolean;
+
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  allow?: string[];
+}
+
 export class SessionConfig {
   @ValidateNested({ each: true })
   @Type(() => WebhookConfig)
@@ -328,6 +338,20 @@ export class SessionConfig {
   @Type(() => GowsConfig)
   @IsOptional()
   gows?: GowsConfig;
+
+  @ApiProperty({
+    description:
+      'WhatsApp voice/video calls handled by the session (GOWS only). Off by default.',
+    example: {
+      enabled: false,
+      allow: ['573001112233'],
+    },
+    required: false,
+  })
+  @ValidateNested()
+  @Type(() => CallsSessionConfig)
+  @IsOptional()
+  calls?: CallsSessionConfig;
 
   @ApiProperty({
     description: 'WebJS-specific settings.',

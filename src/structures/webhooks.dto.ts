@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CallData } from '@waha/structures/calls.dto';
+import {
+  CallAudioSilent,
+  CallData,
+  CallEnded,
+  CallInfo,
+  CallVideoState,
+} from '@waha/structures/calls.dto';
 import { EventResponsePayload } from '@waha/structures/events.dto';
 import { Label, LabelChatAssociation } from '@waha/structures/labels.dto';
 
@@ -357,6 +363,62 @@ export class WAHAWebhookCallRejected extends WAHAWebhook {
   event = WAHAEvents.CALL_REJECTED;
 
   payload: CallData;
+}
+
+export class WAHAWebhookCallRinging extends WAHAWebhook {
+  @ApiProperty({
+    description:
+      'An incoming call taken by the calls engine is ringing, or an outgoing call was placed',
+  })
+  event = WAHAEvents.CALL_RINGING;
+
+  payload: CallInfo;
+}
+
+export class WAHAWebhookCallConnected extends WAHAWebhook {
+  @ApiProperty({
+    description: 'Audio flows both ways in a managed call',
+  })
+  event = WAHAEvents.CALL_CONNECTED;
+
+  payload: CallInfo;
+}
+
+export class WAHAWebhookCallEnded extends WAHAWebhook {
+  @ApiProperty({
+    description: 'A managed call ended (reason, duration)',
+  })
+  event = WAHAEvents.CALL_ENDED;
+
+  payload: CallEnded;
+}
+
+export class WAHAWebhookCallAudioSilent extends WAHAWebhook {
+  @ApiProperty({
+    description: 'A connected call got no audio from the peer for a while',
+  })
+  event = WAHAEvents.CALL_AUDIO_SILENT;
+
+  payload: CallAudioSilent;
+}
+
+export class WAHAWebhookCallAudioRestored extends WAHAWebhook {
+  @ApiProperty({
+    description: 'Peer audio is back after call.audio.silent',
+  })
+  event = WAHAEvents.CALL_AUDIO_RESTORED;
+
+  payload: CallAudioSilent;
+}
+
+export class WAHAWebhookCallVideo extends WAHAWebhook {
+  @ApiProperty({
+    description:
+      "The peer's camera state, orientation or a video upgrade request changed",
+  })
+  event = WAHAEvents.CALL_VIDEO;
+
+  payload: CallVideoState;
 }
 
 export class WAHAWebhookLabelUpsert extends WAHAWebhook {
