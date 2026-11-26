@@ -95,6 +95,7 @@ import {
   MessageReactionRequest,
   MessageReplyRequest,
   MessageTextRequest,
+  MessageStickerRequest,
   MessageVideoRequest,
   MessageVoiceRequest,
   SendSeenRequest,
@@ -1318,6 +1319,8 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
       type === messages.MediaType.PTV
     ) {
       media.mimetype = media.mimetype || WAMimeType.VIDEO;
+    } else if (type === messages.MediaType.STICKER) {
+      media.mimetype = 'image/webp';
     } else if (type === messages.MediaType.DOCUMENT) {
       if (!media.mimetype) {
         media.mimetype = await detectMimetype(media.content as Buffer);
@@ -1429,6 +1432,11 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
   @Activity()
   async sendVoice(request: MessageVoiceRequest) {
     return await this.sendMedia(messages.MediaType.AUDIO, request);
+  }
+
+  @Activity()
+  async sendSticker(request: MessageStickerRequest) {
+    return await this.sendMedia(messages.MediaType.STICKER, request);
   }
 
   @Activity()

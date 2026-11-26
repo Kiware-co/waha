@@ -120,6 +120,41 @@ export class VideoRemoteFile {
   url: string;
 }
 
+export class StickerBinaryFile {
+  @ApiProperty({
+    description: 'MIME type of the sticker. Only image/webp is supported.',
+  })
+  mimetype = 'image/webp';
+
+  @ApiProperty({
+    description: 'Sticker file name. Optional',
+  })
+  filename = 'sticker.webp';
+
+  @ApiProperty({
+    description:
+      'Base64-encoded WebP data (512x512 recommended, animated WebP supported)',
+  })
+  data: string;
+}
+
+export class StickerRemoteFile {
+  @ApiProperty({
+    description: 'MIME type of the sticker. Only image/webp is supported.',
+  })
+  mimetype = 'image/webp';
+
+  @ApiProperty({
+    description: 'Sticker file name. Optional',
+  })
+  filename = 'sticker.webp';
+
+  @ApiProperty({
+    description: 'URL of a WebP file',
+  })
+  url: string;
+}
+
 export class FileURL {
   @IsString()
   @IsNotEmpty()

@@ -29,6 +29,8 @@ import {
   FileType,
   FileURL,
   RemoteFile,
+  StickerBinaryFile,
+  StickerRemoteFile,
   VideoBinaryFile,
   VideoRemoteFile,
   VoiceBinaryFile,
@@ -347,6 +349,20 @@ export class MessageVoiceRequest extends ChatRequest {
 
   @ConvertApiProperty()
   convert: boolean;
+}
+
+@ApiExtraModels(StickerRemoteFile, StickerBinaryFile)
+export class MessageStickerRequest extends ChatRequest {
+  @ApiProperty({
+    oneOf: [
+      { $ref: getSchemaPath(StickerRemoteFile) },
+      { $ref: getSchemaPath(StickerBinaryFile) },
+    ],
+  })
+  file: StickerRemoteFile | StickerBinaryFile;
+
+  @ReplyToProperty()
+  reply_to?: string;
 }
 
 @ApiExtraModels(VideoRemoteFile, VideoBinaryFile)

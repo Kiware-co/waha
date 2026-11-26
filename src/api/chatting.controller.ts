@@ -39,6 +39,7 @@ import {
   MessageStarRequest,
   MessageTextQuery,
   MessageTextRequest,
+  MessageStickerRequest,
   MessageVideoRequest,
   MessageVoiceRequest,
   NewMessageIDResponse,
@@ -46,6 +47,7 @@ import {
   WANumberExistResult,
 } from '../structures/chatting.dto';
 import { WAMessage } from '../structures/responses.dto';
+import { validateStickerRequest } from '@waha/api/sticker.validation';
 import {
   mentionsAll,
   validateRequestMentions,
@@ -127,6 +129,19 @@ export class ChattingController {
   async sendVoice(@Body() request: MessageVoiceRequest) {
     const whatsapp = await this.manager.getWorkingSession(request.session);
     return whatsapp.sendVoice(request);
+  }
+
+  @Post('/sendSticker')
+  @ApiOperation({
+    summary: 'Send a sticker',
+    description:
+      'WebP image (static or animated) sent as a WhatsApp sticker. Either from an URL or base64 data.',
+  })
+  @CheckPolicies(CanSession(Action.Send, FromBody('session')))
+  async sendSticker(@Body() request: MessageStickerRequest) {
+    validateStickerRequest(request);
+    const whatsapp = await this.manager.getWorkingSession(request.session);
+    return whatsapp.sendSticker(request);
   }
 
   @Post('/sendVideo')
